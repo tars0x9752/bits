@@ -1,17 +1,25 @@
 {
   "name": "bits",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bits is a simple mutable bitset implementation in TypeScript",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "exec": "node lib/index.js"
+    "exec": "node lib/index.js",
+    "fmt": "prettier --write src/**/*.ts",
+    "test": "jest --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.2.3",
+    "prettier": "^2.0.2",
+    "ts-jest": "^25.2.1"
   }
 }
