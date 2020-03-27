@@ -6,7 +6,7 @@ const toOneZeroChar = (val: boolean) => (val ? '1' : '0')
 export class Bits {
   private arr: boolean[]
 
-  constructor(size: number, val: number | string) {
+  constructor(size: number, val: number | string = 0) {
     const binStr = (isNumber(val) && toBinaryString(val)) || (isString(val) && val) || ''
 
     const binArr = binStr
@@ -14,7 +14,9 @@ export class Bits {
       .reverse()
       .map(v => v === '1')
 
-    this.arr = [...Array(size)].map((_, i) => (i < binArr.length ? binArr[i] : false))
+    const arrSize = Math.max(1, size)
+
+    this.arr = [...Array(arrSize)].map((_, i) => (i < binArr.length ? binArr[i] : false))
   }
 
   at(pos: number) {
@@ -33,7 +35,7 @@ export class Bits {
     }
 
     return (bit?: boolean) => {
-      if(bit === undefined) {
+      if (bit === undefined) {
         return get()
       } else {
         return set(bit)
@@ -95,7 +97,3 @@ export class Bits {
     return parseInt(str, 2)
   }
 }
-
-const bits = new Bits(4, '1110')
-
-console.log(bits.toString())
