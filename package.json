@@ -10,9 +10,8 @@
     "fmt": "prettier --write src/**/*.ts",
     "test": "jest --verbose"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "huffhuffman",
+  "license": "MIT",
   "dependencies": {
     "typescript": "^3.8.3"
   },
