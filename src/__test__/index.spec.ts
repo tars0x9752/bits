@@ -1,31 +1,51 @@
 import { Bits } from '../index'
 
 describe('Bits class', () => {
-  it('constructor', () => {
-    expect(new Bits(4, 3).toNumber()).toBe(3)
-    expect(new Bits(4, '0011').toNumber()).toBe(3)
-    expect(new Bits(8).toString()).toBe('00000000')
+  test('constructor', () => {
+    expect(new Bits(3, 4).toNumber()).toBe(3)
+    expect(new Bits('0011', 4).toNumber()).toBe(3)
+    expect(new Bits(0, 8).toString()).toBe('00000000')
   })
 
-  it('make sure least Bits length is 1', () => {
-    expect(new Bits(0, 3).toNumber()).toBe(1)
-    expect(new Bits(-100, 3).toNumber()).toBe(1)
-    expect(new Bits(0, 2).toNumber()).toBe(0)
+  test('make sure least Bits length is 1', () => {
+    expect(new Bits(3, 0).toNumber()).toBe(1)
+    expect(new Bits(3, -100).toNumber()).toBe(1)
+    expect(new Bits(2, 0).toNumber()).toBe(0)
   })
 
-  it('toString()', () => {
-    expect(new Bits(4, 3).toString()).toBe('0011')
-    expect(new Bits(32).toString()).toBe('00000000000000000000000000000000')
-    expect(new Bits(32, 5).toString()).toBe('00000000000000000000000000000101')
+  test('toString()', () => {
+    expect(new Bits(3, 4).toString()).toBe('0011')
+    expect(new Bits().toString()).toBe('00000000000000000000000000000000')
+    expect(new Bits(5).toString()).toBe('00000000000000000000000000000101')
   })
 
-  it('toNumber()', () => {
-    expect(new Bits(32, 5).toNumber()).toBe(5)
-    expect(new Bits(4, '0011').toNumber()).toBe(3)    
+  test('toNumber()', () => {
+    expect(new Bits(5, 4).toNumber()).toBe(5)
+    expect(new Bits('0011', 4).toNumber()).toBe(3)
   })
 
-  it('at()()', () => {
-    expect(new Bits(8, 3).at(0)()).toBeTruthy()
-    expect(new Bits(8, 3).at(1)()).toBeTruthy()
+  test('at(pos)()', () => {
+    const bits = new Bits(3, 8)
+
+    expect(bits.at(0)()).toBeTruthy()
+    expect(bits.at(1)()).toBeTruthy()
+    expect(bits.at(2)()).toBeFalsy()
+    expect(bits.at(3)()).toBeFalsy()
+  })
+
+  test('at(pos)(bit)', () => {
+    const bits = new Bits(0, 8) // 00000000
+
+    expect(bits.at(1)(true))
+  })
+
+  test('immutability', () => {
+    const bits = new Bits(0, 8) // 00000000
+
+    const bits2 = bits.at(2)(true).at(3)(true)
+
+    expect(bits.none()).toBeTruthy()
+    expect(bits2.none()).toBeFalsy()
+    expect(bits2.toNumber()).toBe(12) // 2 ** 2 + 2 ** 3 = 12
   })
 })

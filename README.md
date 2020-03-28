@@ -1,3 +1,3 @@
 # Bits
 
-Bits is a simple bitset implementation in TypeScript
+Bits is a simple, and not very fast, but 'basically' immutable **bitset** implementation in TypeScript
