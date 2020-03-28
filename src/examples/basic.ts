@@ -1,11 +1,5 @@
-# Bits
+import { Bits } from '../index'
 
-Bits is a simple, and not very fast, but immutable **bitset** implementation in TypeScript
-
-## Examples
-
-### basics
-```ts
 // instantiation
 const bits = new Bits(3, 4) // 0011
 const bits2 = new Bits('0011', 4) // 0011
@@ -38,11 +32,8 @@ console.log(bits.at(0)()) // true
 console.log(bits.at(1)()) // true
 console.log(bits.at(2)()) // false
 console.log(bits.at(3)()) // false
-```
 
-### some utility methods
-
-```ts
+// some utility methods
 const emptyBits = new Bits(0, 8) // 00000000
 console.log(emptyBits.all()) // false
 console.log(emptyBits.none()) // true
@@ -52,6 +43,5 @@ console.log(notEmptyBits.none()) // false
 console.log(notEmptyBits.any()) // true
 
 const whateverBits = new Bits('1010111', 8) // 01010111
-console.log(whateverBits.count()) // 5 
+console.log(whateverBits.count()) // 5
 console.log(whateverBits.flip().toString()) // 10101000
-```

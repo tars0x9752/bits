@@ -1,15 +1,17 @@
 {
   "name": "bits",
   "version": "1.0.0",
-  "description": "Bits is a simple mutable bitset implementation in TypeScript",
+  "description": "Bits is a simple immutable bitset implementation in TypeScript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "exec": "node lib/index.js",
+    "exec:exs": "node lib/examples/basic.js",
     "fmt": "prettier --write src/**/*.ts",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "prepublish": "tsc"
   },
   "author": "huffhuffman",
   "license": "MIT",

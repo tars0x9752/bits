@@ -42,7 +42,7 @@ describe('Bits class', () => {
     expect(bits.at(1)(true).toString()).toBe('0010')
     expect(bits.at(3)(1).toString()).toBe('1000')
     expect(bits.at(3)(1).at(2)(1).at(3)(false).toString()).toBe('0100')
-    expect(bits.at(100)(1).toString()).toBe('0000') // do nothing if out of range 
+    expect(bits.at(100)(1).toString()).toBe('0000') // do nothing if out of range
   })
 
   test('immutability', () => {
