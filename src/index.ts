@@ -42,8 +42,10 @@ export class Bits {
       return setAt(pos)(bit)
     }
 
-    return <T extends boolean>(bit?: T): T extends boolean ? Bits : boolean => {
-      return (isBoolean(bit) ? set(bit) : get()) as T extends boolean ? Bits : boolean
+    return <T extends boolean | number>(bit?: T): T extends boolean | number ? Bits : boolean => {
+      return (isBoolean(bit) || isNumber(bit) ? set(bit) : get()) as T extends boolean | number
+        ? Bits
+        : boolean
     }
   }
 

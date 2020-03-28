@@ -22,6 +22,8 @@ describe('Bits class', () => {
   test('toNumber()', () => {
     expect(new Bits(5, 4).toNumber()).toBe(5)
     expect(new Bits('0011', 4).toNumber()).toBe(3)
+    expect(new Bits('11111').toNumber()).toBe(31)
+    expect(new Bits('100000').toNumber()).toBe(32)
   })
 
   test('at(pos)()', () => {
@@ -34,9 +36,13 @@ describe('Bits class', () => {
   })
 
   test('at(pos)(bit)', () => {
-    const bits = new Bits(0, 8) // 00000000
+    const bits = new Bits(0, 4) // 0000
 
-    expect(bits.at(1)(true))
+    // expect(bits.at(1)(1).toString()).toBe('0010')
+    expect(bits.at(1)(true).toString()).toBe('0010')
+    expect(bits.at(3)(1).toString()).toBe('1000')
+    expect(bits.at(3)(1).at(2)(1).at(3)(false).toString()).toBe('0100')
+    expect(bits.at(100)(1).toString()).toBe('0000') // do nothing if out of range 
   })
 
   test('immutability', () => {
@@ -44,8 +50,7 @@ describe('Bits class', () => {
 
     const bits2 = bits.at(2)(true).at(3)(true)
 
-    expect(bits.none()).toBeTruthy()
-    expect(bits2.none()).toBeFalsy()
+    expect(bits.toNumber()).toBe(0)
     expect(bits2.toNumber()).toBe(12) // 2 ** 2 + 2 ** 3 = 12
   })
 })
